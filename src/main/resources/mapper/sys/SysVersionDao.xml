@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.sys.dao.SysVersionDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.sys.entity.SysVersionEntity" id="sysVersionMap">
+        <result property="versionId" column="version_id"/>
+        <result property="versionNo" column="version_no"/>
+        <result property="versionTitle" column="version_title"/>
+        <result property="versionContent" column="version_content"/>
+        <result property="versionType" column="version_type"/>
+        <result property="forceUpdate" column="force_update"/>
+        <result property="downloadUrl" column="download_url"/>
+        <result property="isValid" column="is_valid"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="io.renren.modules.sys.entity.SysVersionEntity">
+		select * from sys_version where version_id = #{value}
+	</select>
+
+	<select id="query" resultType="io.renren.modules.sys.entity.SysVersionEntity">
+		select * from sys_version
+		<where>
+			<if test="versionNo != null">AND `version_no` = #{versionNo} </if>
+			<if test="versionTitle != null">AND `version_title` = #{versionTitle} </if>
+			<if test="versionContent != null">AND `version_content` = #{versionContent} </if>
+			<if test="versionType != null">AND `version_type` = #{versionType} </if>
+			<if test="forceUpdate != null">AND `force_update` = #{forceUpdate} </if>
+			<if test="downloadUrl != null">AND `download_url` = #{downloadUrl} </if>
+			<if test="isValid != null">AND `is_valid` = #{isValid} </if>
+			<if test="createBy != null">AND `create_by` = #{createBy} </if>
+			<if test="updateBy != null">AND `update_by` = #{updateBy} </if>
+			<if test="createTime != null">AND `create_time` = #{createTime} </if>
+			<if test="updateTime != null">AND `update_time` = #{updateTime}</if>
+		</where>
+	</select>
+
+	<select id="queryList" resultType="io.renren.modules.sys.entity.SysVersionEntity">
+		select * from sys_version
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by version_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from sys_version 
+	</select>
+	 
+	<insert id="save" parameterType="io.renren.modules.sys.entity.SysVersionEntity" useGeneratedKeys="true" keyProperty="versionId">
+		insert into sys_version
+		(
+			`version_no`, 
+			`version_title`, 
+			`version_content`, 
+			`version_type`, 
+			`force_update`, 
+			`download_url`, 
+			`is_valid`, 
+			`create_by`, 
+			`update_by`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{versionNo}, 
+			#{versionTitle}, 
+			#{versionContent}, 
+			#{versionType}, 
+			#{forceUpdate}, 
+			#{downloadUrl}, 
+			#{isValid}, 
+			#{createBy}, 
+			#{updateBy}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="io.renren.modules.sys.entity.SysVersionEntity">
+		update sys_version 
+		<set>
+			<if test="versionNo != null">`version_no` = #{versionNo}, </if>
+			<if test="versionTitle != null">`version_title` = #{versionTitle}, </if>
+			<if test="versionContent != null">`version_content` = #{versionContent}, </if>
+			<if test="versionType != null">`version_type` = #{versionType}, </if>
+			<if test="forceUpdate != null">`force_update` = #{forceUpdate}, </if>
+			<if test="downloadUrl != null">`download_url` = #{downloadUrl}, </if>
+			<if test="isValid != null">`is_valid` = #{isValid}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where version_id = #{versionId}
+	</update>
+	
+	<delete id="delete">
+		delete from sys_version where version_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from sys_version where version_id in 
+		<foreach item="versionId" collection="array" open="(" separator="," close=")">
+			#{versionId}
+		</foreach>
+	</delete>
+
+</mapper>
