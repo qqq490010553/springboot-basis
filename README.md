@@ -1,6 +1,5 @@
 **项目说明** 
-- renren-fastplus是[renren-fast](http://git.oschina.net/babaio/renren-fast)的企业版，针对企业的Java快速开发平台，引入部门管理、实现数据权限等功能
-<br> 
+- 个人用于学习项目<br> 
  
 
 
@@ -27,7 +26,7 @@
 
 **项目结构** 
 ```
-renren-fastplus
+project
 ├─doc  项目SQL语句
 │
 ├─common 公共模块
@@ -55,11 +54,7 @@ renren-fastplus
 <br> 
 
 **如何交流、反馈、参与贡献？** 
-- 开发文档：http://www.renren.io/open/renren-fastplus/
-- Git仓库：http://git.oschina.net/babaio/renren-fastplus
-- 其他项目：http://www.renren.io/open/
-- [编程入门教程](http://www.renren.io)：http://www.renren.io   
-- 官方QQ群：324780204、145799952
+- QQ：460363410
 - 如需关注项目最新动态，请Watch、Star项目，同时也是对项目最好的支持
 <br> 
 
@@ -78,31 +73,19 @@ renren-fastplus
 
  **本地部署**
 - 通过git下载源码
-- 创建数据库renren_fastplus，数据库编码为UTF-8
+- 创建数据库r{projectname}，数据库编码为UTF-8
 - 执行doc/db.sql文件，初始化数据
 - 修改application-dev.yml，更新MySQL账号和密码
 - Eclipse、IDEA运行RenrenApplication.java，则可启动项目
-- 项目访问路径：http://localhost:8080/renren-fastplus
+- 项目访问路径：http://localhost:8080/{projectname}
 - 账号密码：admin/admin
-- Swagger路径：http://localhost:8080/renren-fastplus/swagger/index.html
+- Swagger路径：http://localhost:8080/{projectname}swagger/index.html
 
  **项目演示**
-- 演示地址：http://demo.open.renren.io/renren-fastplus
-- 账号密码：admin/admin
-- Swagger地址：http://demo.open.renren.io/renren-fastplus/swagger/index.html
 <br> <br> <br> 
 
 **接口文档效果图：**
-![输入图片说明](http://cdn.renren.io/img/72ef13cda8c64bf88b9c6e93f08cc065 "在这里输入图片标题")
-<br> <br> <br> 
+
 
 **演示效果图：**
-![输入图片说明](http://cdn.renren.io/img/2b460788c4c54f4fbd1ea7404202ad6b "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/250c0cb74d7e491787fc0898e9eafd69 "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/98f37ff9234942a28eaa868e167154c5 "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/9b0c60dfe7ee48fb87bb933e31ebf36f "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/f59b6f61c36f49e1851a5bf3e91a1e5b "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/c3fe6c2146dc450f95b5b85d0ad0325f "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/069045e6c6d24d88b6c2827a1b625da4 "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/5d4d6c1acd5c4455930dc5dc7d88ad82 "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/35dfe497ea7642028c7d6115a5a1c5e8 "在这里输入图片标题")
+
