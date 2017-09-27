@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.api.dao.UserWalletDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.api.entity.UserWalletEntity" id="userWalletMap">
+        <result property="userWalletId" column="user_wallet_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="realMoney" column="real_money"/>
+        <result property="freezeMoney" column="freeze_money"/>
+        <result property="score" column="score"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="isValid" column="is_valid"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="io.renren.modules.api.entity.UserWalletEntity">
+		select * from tb_user_wallet where user_wallet_id = #{value}
+	</select>
+
+	<select id="queryList" resultType="io.renren.modules.api.entity.UserWalletEntity">
+		select * from tb_user_wallet
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by user_wallet_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from tb_user_wallet 
+	</select>
+	 
+	<insert id="save" parameterType="io.renren.modules.api.entity.UserWalletEntity" useGeneratedKeys="true" keyProperty="userWalletId">
+		insert into tb_user_wallet
+		(
+			`user_id`, 
+			`real_money`, 
+			`freeze_money`, 
+			`score`, 
+			`create_time`, 
+			`update_time`, 
+			`create_by`, 
+			`update_by`, 
+			`is_valid`
+		)
+		values
+		(
+			#{userId}, 
+			#{realMoney}, 
+			#{freezeMoney}, 
+			#{score}, 
+			#{createTime}, 
+			#{updateTime}, 
+			#{createBy}, 
+			#{updateBy}, 
+			#{isValid}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="io.renren.modules.api.entity.UserWalletEntity">
+		update tb_user_wallet 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="realMoney != null">`real_money` = #{realMoney}, </if>
+			<if test="freezeMoney != null">`freeze_money` = #{freezeMoney}, </if>
+			<if test="score != null">`score` = #{score}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="isValid != null">`is_valid` = #{isValid}</if>
+		</set>
+		where user_wallet_id = #{userWalletId}
+	</update>
+	
+	<delete id="delete">
+		delete from tb_user_wallet where user_wallet_id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from tb_user_wallet where user_wallet_id in 
+		<foreach item="userWalletId" collection="array" open="(" separator="," close=")">
+			#{userWalletId}
+		</foreach>
+	</delete>
+
+</mapper>

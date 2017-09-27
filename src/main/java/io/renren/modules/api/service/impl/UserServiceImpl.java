@@ -20,7 +20,8 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
-	
+
+
 	@Override
 	public UserEntity queryObject(Long userId){
 		return userDao.queryObject(userId);
@@ -77,5 +78,10 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return user.getUserId();
+	}
+
+	@Override
+	public void save(UserEntity user) {
+		userDao.save(user);
 	}
 }

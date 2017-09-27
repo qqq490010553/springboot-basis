@@ -38,4 +38,6 @@ public interface UserService {
 	 * @return          返回用户ID
 	 */
 	long login(String mobile, String password);
+
+    void save(UserEntity user);
 }
